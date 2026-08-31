@@ -238,6 +238,46 @@
   .p-item .txt .t2{ font-size:11px; color:var(--cream-dim); }
   .p-item .amt2{ font-size:13px; font-weight:700; }
 
+  /* quad category stats (entró / gastado / diezmo / ahorro) */
+  .p-quad{ display:grid; grid-template-columns: repeat(4,1fr); gap:7px; margin-bottom:16px; }
+  .p-quad .q{
+    background: var(--surface);
+    border-radius: 10px;
+    padding: 9px 6px;
+    text-align:center;
+    border-top: 2px solid var(--qcolor, var(--orange));
+  }
+  .p-quad .q .lbl{ font-size:9px; color:var(--cream-dim); }
+  .p-quad .q .val{ font-size:11.5px; font-weight:700; margin-top:4px; }
+  .p-quad .q.entro{ --qcolor: var(--orange); }
+  .p-quad .q.entro .val{ color:var(--orange); }
+  .p-quad .q.gastado{ --qcolor: var(--cream-dim); }
+  .p-quad .q.diezmo{ --qcolor: var(--amber); }
+  .p-quad .q.diezmo .val{ color:var(--amber); }
+  .p-quad .q.ahorro{ --qcolor: var(--leaf); }
+  .p-quad .q.ahorro .val{ color:var(--leaf); }
+
+  /* mini billetera card */
+  .p-wallet-lbl{ font-size:12px; color:var(--cream-dim); margin-bottom:10px; }
+  .p-wallet-card{
+    background: linear-gradient(135deg, var(--amber), var(--orange) 85%);
+    border-radius: 14px;
+    padding: 14px 16px;
+    color:#1a140f;
+    position:relative;
+    overflow:hidden;
+  }
+  .p-wallet-card::after{
+    content:"";
+    position:absolute; right:-24px; top:-24px;
+    width:80px; height:80px; border-radius:50%;
+    background: rgba(255,255,255,0.16);
+  }
+  .p-wallet-row{ display:flex; justify-content:space-between; align-items:center; position:relative; font-size:12px; font-weight:700; }
+  .p-wallet-row .cur{ font-size:10px; background:rgba(26,20,15,0.16); padding:2px 7px; border-radius:6px; }
+  .p-wallet-amt{ font-size:19px; font-weight:800; margin-top:8px; position:relative; }
+  .p-wallet-foot{ font-size:10.5px; margin-top:6px; opacity:0.75; position:relative; }
+
   /* floating badge on phone */
   .float-badge{
     position:absolute;
@@ -318,6 +358,20 @@
   .bars .bar.alt{ background: linear-gradient(180deg, #7dcf98, var(--leaf-dim)); }
   .bars-labels{ display:flex; gap:8px; margin-top:10px; }
   .bars-labels span{ flex:1; text-align:center; font-size:10px; color:var(--cream-dim); }
+
+  .donut-block{ display:flex; align-items:center; gap:32px; }
+  .donut{
+    width:132px; height:132px; border-radius:50%; flex-shrink:0;
+    background: conic-gradient(var(--orange) 0% 46%, var(--cream-dim) 46% 68%, var(--amber) 68% 84%, var(--leaf) 84% 100%);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .donut::before{ content:""; position:absolute; width:92px; height:92px; border-radius:50%; background: var(--bg-soft); }
+  .donut-center{ position:relative; text-align:center; }
+  .donut-center .amt{ font-family:'Fraunces',serif; font-size:18px; }
+  .donut-center .cap{ font-size:9px; color:var(--cream-dim); margin-top:2px; }
+  .donut-legend{ display:flex; flex-direction:column; gap:10px; }
+  .donut-legend span{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--cream-dim); }
+  .donut-legend i{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
 
   .dash-copy h3{ font-size: 24px; color:var(--cream); margin-bottom: 14px; }
   .dash-copy p{ font-size:15px; color:var(--cream-dim); line-height:1.65; margin-bottom: 20px; }
@@ -446,7 +500,7 @@
             </div>
 
             <div class="p-balance-card">
-              <div class="lbl">SALDO DISPONIBLE</div>
+              <div class="lbl">BALANCE GENERAL</div>
               <div class="amt">$1.284.500</div>
               <div class="p-trend">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M4 15l6-6 4 4 6-8"/></svg>
@@ -457,37 +511,23 @@
               </svg>
             </div>
 
-            <div class="p-row">
-              <div class="p-chip leaf">
-                <div class="lbl">AHORRADO</div>
-                <div class="val">$420.000</div>
-              </div>
-              <div class="p-chip orange">
-                <div class="lbl">PRESUPUESTO</div>
-                <div class="val">68% usado</div>
-              </div>
+            <div class="p-quad">
+              <div class="q entro"><div class="lbl">ENTRÓ</div><div class="val">$650k</div></div>
+              <div class="q gastado"><div class="lbl">GASTADO</div><div class="val">$228k</div></div>
+              <div class="q diezmo"><div class="lbl">DIEZMO</div><div class="val">$65k</div></div>
+              <div class="q ahorro"><div class="lbl">AHORRO</div><div class="val">$420k</div></div>
             </div>
 
-            <div class="p-list-title"><span>Movimientos recientes</span><span>Ver todo</span></div>
-            <div class="p-item">
-              <div class="p-icon" style="background:rgba(92,179,124,0.15); color:#5cb37c;">🛒</div>
-              <div class="txt"><div class="t1">Mercado</div><div class="t2">Hoy · Alimentación</div></div>
-              <div class="amt2">-$86.400</div>
-            </div>
-            <div class="p-item">
-              <div class="p-icon" style="background:rgba(255,178,56,0.15); color:#ffb238;">💡</div>
-              <div class="txt"><div class="t1">Servicios</div><div class="t2">Ayer · Hogar</div></div>
-              <div class="amt2">-$142.000</div>
-            </div>
-            <div class="p-item">
-              <div class="p-icon" style="background:rgba(255,106,26,0.15); color:#ff6a1a;">💼</div>
-              <div class="txt"><div class="t1">Pago freelance</div><div class="t2">Lun · Ingreso</div></div>
-              <div class="amt2" style="color:#5cb37c;">+$650.000</div>
+            <div class="p-wallet-lbl">BILLETERA · Mis tarjetas</div>
+            <div class="p-wallet-card">
+              <div class="p-wallet-row"><span>Bancolombia</span><span class="cur">COP</span></div>
+              <div class="p-wallet-amt">$1.284.500</div>
+              <div class="p-wallet-foot">Gastado $228.000 · •••• 2884</div>
             </div>
           </div>
         </div>
-        <div class="float-badge top"><span class="dot"></span> Meta de ahorro al 84%</div>
-        <div class="float-badge bottom"><span class="dot" style="background:#ff6a1a;"></span> Alerta de presupuesto</div>
+        <div class="float-badge top"><span class="dot"></span> Meta de ahorro al 21%</div>
+        <div class="float-badge bottom"><span class="dot" style="background:#e8b54a;"></span> Diezmo al día</div>
       </div>
     </div>
   </header>
@@ -528,6 +568,20 @@
             <p>Un resumen simple de en qué se fue tu plata este mes, comparado con el anterior.</p>
           </div>
         </div>
+        <div class="feature">
+          <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#e8b54a" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <div>
+            <h3>Diezmo aparte, sin cálculo</h3>
+            <p>Marca un ingreso y miEco separa el diezmo solo, para que nunca tengas que sacar la cuenta.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <div class="f-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#5cb37c" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="3"/><path d="M2 10h20M6 15h4"/></svg></div>
+          <div>
+            <h3>Billetera con tus tarjetas</h3>
+            <p>Guarda tus cuentas y tarjetas dentro de la app y mira cuánto llevas gastado en cada una.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -537,29 +591,26 @@
       <div class="dash-card">
         <div class="dash-visual">
           <div class="dv-row">
-            <div><div class="lbl">GASTO POR CATEGORÍA</div><div class="val">$1.240.000</div></div>
-            <div style="text-align:right;"><div class="lbl">VS. MES ANTERIOR</div><div class="val" style="color:#5cb37c; font-size:16px;">-6,4%</div></div>
+            <div><div class="lbl">RESUMEN MENSUAL</div><div class="val">Agosto 2026</div></div>
           </div>
-          <div class="bars">
-            <div class="bar" style="height:38%;"></div>
-            <div class="bar alt" style="height:62%;"></div>
-            <div class="bar" style="height:50%;"></div>
-            <div class="bar alt" style="height:80%;"></div>
-            <div class="bar" style="height:45%;"></div>
-            <div class="bar alt" style="height:68%;"></div>
-          </div>
-          <div class="bars-labels">
-            <span>Comida</span><span>Hogar</span><span>Transp.</span><span>Ahorro</span><span>Salud</span><span>Ocio</span>
+          <div class="donut-block">
+            <div class="donut"><div class="donut-center"><div class="amt">$650k</div><div class="cap">disponible</div></div></div>
+            <div class="donut-legend">
+              <span><i style="background:#ff6a1a;"></i>Disponible</span>
+              <span><i style="background:var(--cream-dim);"></i>Gastos</span>
+              <span><i style="background:#e8b54a;"></i>Diezmo</span>
+              <span><i style="background:#5cb37c;"></i>Ahorro</span>
+            </div>
           </div>
         </div>
         <div class="dash-copy">
-          <h3>Tu panorama financiero, sin adornos</h3>
-          <p>miEco organiza tus categorías automáticamente y te deja ajustar cualquier cosa a mano. El panel principal se actualiza cada vez que registras un movimiento.</p>
+          <h3>Tu billetera y tu diezmo, en el mismo lugar</h3>
+          <p>miEco separa lo que entra en cuentas, diezmo y ahorro sin que tengas que hacer la cuenta a mano, y guarda tus tarjetas en una billetera dentro de la app para que veas cuánto llevas gastado por cada una.</p>
           <div class="tag-list">
-            <span class="tag">Modo oscuro y claro</span>
-            <span class="tag">Exportar a Excel</span>
-            <span class="tag">Múltiples cuentas</span>
-            <span class="tag">100% offline</span>
+            <span class="tag">Billetera con tus tarjetas</span>
+            <span class="tag">Diezmo automático</span>
+            <span class="tag">Sincronización en la nube</span>
+            <span class="tag">Copia de seguridad automática</span>
           </div>
         </div>
       </div>
